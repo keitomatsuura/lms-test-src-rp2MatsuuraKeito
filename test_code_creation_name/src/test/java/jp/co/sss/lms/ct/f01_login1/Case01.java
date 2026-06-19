@@ -45,6 +45,9 @@ public class Case01 {
 		//login/index.htmlからタイトルを取得
 		//タイトルチェック		
 		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		getEvidence(new Object() {
+		});
 	}
 
 }
