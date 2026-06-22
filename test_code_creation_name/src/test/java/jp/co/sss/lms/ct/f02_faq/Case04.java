@@ -1,6 +1,7 @@
 package jp.co.sss.lms.ct.f02_faq;
 
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * 結合テスト よくある質問機能
@@ -36,6 +39,14 @@ public class Case04 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
+
+		//URLに飛ぶ		
+		goTo("http://localhost:8080/lms/");
+		//タイトルチェック		
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -43,6 +54,28 @@ public class Case04 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+
+		String USER = "StudentAA01";
+		String PASSWORD = "StudentAA001";
+
+		// ログインID入力
+		WebElement inputLoginId = webDriver.findElement(By.id("loginId"));
+		inputLoginId.sendKeys(USER);
+
+		// パスワード入力
+		WebElement password = webDriver.findElement(By.id("password"));
+		password.sendKeys(PASSWORD);
+
+		// ログインボタン押下
+		WebElement loginbtn = webDriver.findElement(By.className("btn-primary"));
+		loginbtn.click();
+
+		//タイトルチェック		
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		getEvidence(new Object() {
+		});
+
 	}
 
 	@Test
@@ -50,6 +83,19 @@ public class Case04 {
 	@DisplayName("テスト03 上部メニューの「ヘルプ」リンクからヘルプ画面に遷移")
 	void test03() {
 		// TODO ここに追加
+
+		//「機能」押下
+		WebElement functionClick = webDriver.findElement(By.className("dropdown-toggle"));
+		functionClick.click();
+
+		//「ヘルプ」押下
+		WebElement helpClick = webDriver.findElement(By.linkText("ヘルプ"));
+		helpClick.click();
+		//タイトルチェック		
+		assertEquals("ヘルプ | LMS", webDriver.getTitle());
+
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -57,6 +103,15 @@ public class Case04 {
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
 		// TODO ここに追加
+		//URLの取得
+		String faqClick = webDriver.findElement(By.linkText("よくある質問")).getAttribute("href");
+		//取得したURLに遷移
+		goTo(faqClick);
+		//遷移先チェック		
+		assertEquals("よくある質問 | LMS", webDriver.getTitle());
+
+		getEvidence(new Object() {
+		});
 	}
 
 }
