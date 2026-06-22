@@ -36,6 +36,12 @@ public class Case03 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
+
+		//URLに飛ぶ		
+		goTo("http://localhost:8080/lms/");
+
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -43,6 +49,7 @@ public class Case03 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+
 	}
 
 }
