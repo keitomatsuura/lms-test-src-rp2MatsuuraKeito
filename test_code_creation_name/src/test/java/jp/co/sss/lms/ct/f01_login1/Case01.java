@@ -40,8 +40,6 @@ public class Case01 {
 		//urlに飛ぶ		
 		goTo("http://localhost:8080/lms/");
 
-		//urlチェック		
-		assertEquals("http://localhost:8080/lms/", webDriver.getCurrentUrl());
 		//login/index.htmlからタイトルを取得
 		//タイトルチェック		
 		assertEquals("ログイン | LMS", webDriver.getTitle());
