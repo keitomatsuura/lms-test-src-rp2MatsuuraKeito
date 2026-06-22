@@ -105,9 +105,12 @@ public class Case04 {
 		// TODO ここに追加
 		//URLの取得
 		String faqClick = webDriver.findElement(By.linkText("よくある質問")).getAttribute("href");
-		//取得したURLに遷移
-		goTo(faqClick);
-		//遷移先チェック		
+		webDriver.get(faqClick);
+
+		//新しく開いたタブへ切り替える
+		webDriver.getWindowHandle();
+
+		//遷移先タブのチェック		
 		assertEquals("よくある質問 | LMS", webDriver.getTitle());
 
 		getEvidence(new Object() {
