@@ -3,6 +3,8 @@ package jp.co.sss.lms.ct.f02_faq;
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * 結合テスト よくある質問機能
@@ -103,15 +107,16 @@ public class Case04 {
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
 		// TODO ここに追加
-		//URLの取得
-		String faqClick = webDriver.findElement(By.linkText("よくある質問")).getAttribute("href");
-		webDriver.get(faqClick);
-
-		//新しく開いたタブへ切り替える
-		webDriver.getWindowHandle();
+		//click on link to open a new window
+		webDriver.findElement(By.linkText("よくある質問")).click();
+		//ウィンドウ情報の取得		
+		Object[] windowHandles = webDriver.getWindowHandles().toArray();
+		//新しく取得したウィンドウに切り替える
+		webDriver.switchTo().window((String) windowHandles[1]);
 
 		//遷移先タブのタイトルチェック		
-		assertEquals("よくある質問 | LMS", webDriver.getTitle());
+		final WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(60));
+		wait.until(ExpectedConditions.titleContains("よくある質問 | LMS"));
 
 		getEvidence(new Object() {
 		});
