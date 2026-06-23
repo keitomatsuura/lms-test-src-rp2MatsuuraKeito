@@ -110,7 +110,7 @@ public class Case04 {
 		//新しく開いたタブへ切り替える
 		webDriver.getWindowHandle();
 
-		//遷移先タブのチェック		
+		//遷移先タブのタイトルチェック		
 		assertEquals("よくある質問 | LMS", webDriver.getTitle());
 
 		getEvidence(new Object() {
