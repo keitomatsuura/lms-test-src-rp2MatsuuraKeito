@@ -127,15 +127,19 @@ public class Case05 {
 	@DisplayName("テスト05 キーワード検索で該当キーワードを含む検索結果だけ表示")
 	void test05() {
 		// TODO ここに追加
-		WebElement keywordInput = webDriver.findElement(By.id("form"));
-		keywordInput.sendKeys("研修");
 
+		String keyword = "研修";
+		//キーワードの入力
+		WebElement keywordInput = webDriver.findElement(By.id("form"));
+		keywordInput.sendKeys(keyword);
+		//検索ボタン押下
 		WebElement searchClick = webDriver.findElement(By.className("btn-primary"));
 		searchClick.click();
+		//検索結果の抽出
 		WebElement anserText = webDriver.findElement(By.className("col-lg-12"));
 
 		String anser = anserText.getText();
-		assertTrue(anser.contains("研修"));
+		assertTrue(anser.contains(keyword));
 
 		scrollTo("500");
 		getEvidence(new Object() {
@@ -148,9 +152,12 @@ public class Case05 {
 	void test06() {
 		// TODO ここに追加
 		scrollTo("0");
+		//クリアの押下		
 		WebElement clearClick = webDriver.findElement(By.xpath("//input[@value='クリア']"));
 		clearClick.click();
+		//キーワード消去のテスト		
 		assertEquals("", clearClick.getText());
+
 		getEvidence(new Object() {
 		});
 	}
