@@ -131,7 +131,8 @@ public class Case06 {
 		WebElement category = webDriver.findElement(By.linkText("【研修関係】"));
 		category.click();
 
-		assertTrue(webDriver.getCurrentUrl().contains("AskedQuestionCategoryId=1"));
+		WebElement Qclick = webDriver.findElement(By.id("question-h[${status.index}]"));
+		assertEquals("Q.キャンセル料・途中退校について", Qclick.getText());
 
 		scrollTo("500");
 		getEvidence(new Object() {
@@ -144,9 +145,14 @@ public class Case06 {
 	@DisplayName("テスト06 検索結果の質問をクリックしその回答を表示")
 	void test06() {
 		// TODO ここに追加
-		//質問を押下		
+		//質問を押下し回答を表示		
 		WebElement Qclick = webDriver.findElement(By.id("question-h[${status.index}]"));
 		Qclick.click();
+
+		//回答をテスト
+		WebElement Acheck = webDriver.findElement(By.id("answer-h[${status.index}]"));
+		assertEquals("A. 受講者の退職や解雇等、やむを得ない事情による途中終了に関してなど、事情をお伺いした上で、協議という形を取らせて頂きます。 弊社営業担当までご相談下さい。",
+				Acheck.getText());
 
 		getEvidence(new Object() {
 		});
